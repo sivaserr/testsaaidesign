@@ -1,0 +1,38 @@
+.alert.alert-success {
+    background-color: #bfd630!important;
+    border: none;
+    color: #fff;
+}
+.sidebar[data-active-color="danger"] .nav li.active > a {
+    color: #bfd630!important;
+}
+.sidebar[data-active-color="danger"] .nav li.active > a i {
+    color: #bfd630!important;
+}
+.btn-primary {
+    background-color: #bfd630!important;
+    border-color: #bfd630!important;
+}
+.btn-primary:hover{
+	background-color: #bfd630!important;
+}
+
+
+
+.table-bordered thead tr th {
+    border: 1px solid #dee2e6;
+}
+.daybutton {
+    text-align: center;
+    margin-top: 20px;
+}
+.customers {
+    width: 80%!important;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media(max-width: 768px){
+	.customers {
+    width: 100%!important;
+}
+}
