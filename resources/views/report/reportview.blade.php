@@ -4,6 +4,11 @@
 Report view
 @endsection
  <style>
+
+
+.main-panel > .content {
+    height: auto!important;
+}
 .report {
     border: 1px solid #dee2e6;
     padding: 40px;

@@ -18,7 +18,7 @@ $(document).ready(function(){
         let _net = document.getElementById(netvalueParent);
         let netValue = _net.getElementsByClassName("netvalue")[0];
         //console.log(netValue)
-        if(netValue.value != ''){
+        if(netValue.value !== ''){
           $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
           $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
           i++; 
