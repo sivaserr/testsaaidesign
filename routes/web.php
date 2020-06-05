@@ -22,6 +22,10 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
+//Change password function
+Route::get('/change-password','Auth\ChangePasswordController@index')->name('password.change');
+Route::post('/change-password','Auth\ChangePasswordController@changePassword')->name('password.update');
+
 //Customers
 Route::get('/customer', 'Customer_Controller@index')->name('customer');
 Route::post('/customer', 'Customer_Controller@store')->name('customer');

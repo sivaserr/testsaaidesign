@@ -53,11 +53,13 @@
                             </label>
                         </div>
 
-                        <div>
-                            <a href="{{url('forgot_password')}}" class="txt3">
-                                Forgot Password?
-                            </a>
-                        </div>
+<!--                         <div>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                        </div> -->
                     </div>
 
                     <div class="container-login100-form-btn">

@@ -48,9 +48,11 @@ class Invoice_Controller extends Controller
         $invoice->customer_id = $request->input('customer');
         $invoice->date = $request->input('date');
         $invoice->sub_total = $request->input('sub_total');
-        $invoice->tax = $request->input('tax');
+        $invoice->total_cgst = $request->input('totalcgst');
+        $invoice->total_sgst = $request->input('totalsgst');
+        $invoice->total_tax = $request->input('tax');
         $invoice->tax_amount = $request->input('tax_amount');
-        $invoice->total_amount = $request->input('total_amount');
+        $invoice->grand_total = $request->input('grand_total');
 
 
         $invoiceproducts = $request->input('invoiceproduct_datas');    
@@ -62,10 +64,13 @@ class Invoice_Controller extends Controller
         $invoice_products->invoice_id =$invoice->id ;
         $invoice_products->description = $invoiceproduct['description'];
         $invoice_products->material_id = $invoiceproduct['material'];
-        $invoice_products->sqrft_copies = $invoiceproduct['sqrft_copies'];
-        $invoice_products->total_sqrft_copies = $invoiceproduct['total'];
+        $invoice_products->size = $invoiceproduct['size'];
+        $invoice_products->sqrft = $invoiceproduct['sqrfts'];
         $invoice_products->qty = $invoiceproduct['qty'];
+        $invoice_products->total_sqrft_copies = $invoiceproduct['total'];
         $invoice_products->price = $invoiceproduct['price'];
+        $invoice_products->cgst = $invoiceproduct['cgst'];
+        $invoice_products->sgst = $invoiceproduct['sgst'];
         $invoice_products->netvalue = $invoiceproduct['netvalue'];
         $invoice_products->save();
              }

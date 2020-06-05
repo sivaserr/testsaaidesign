@@ -16,6 +16,8 @@ All Materials
         <th>S.no</th>
         <th>Material Name</th>
         <th>Hsn Code</th>
+        <th>CGST(%)</th>
+        <th>SGST(%)</th>
         <th>Unit</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -28,6 +30,8 @@ All Materials
         <td>{{$id}}</td>
         <td>{{$material->material_name}}</td>
         <td>{{$material->hsn_code}}</td>
+        <td>{{$material->cgst}}</td>
+        <td>{{$material->sgst}}</td>
         @foreach($units as $unit)
         @if($material->unit === $unit->id)
         <td>{{$unit->unit_name}}</td>

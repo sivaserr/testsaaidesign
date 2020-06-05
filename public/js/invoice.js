@@ -4,7 +4,14 @@
       $('.alert-success').fadeIn().delay(1000).fadeOut();
       });
 
+//toggle menu
 
+            $('#sidebar-btn').on('click', function () {
+                $('.sidebar').toggleClass('visible');
+                $('#main-panel').toggleClass('bodycollapse');
+                
+               
+            });
 
 
 //Invoice Entry Page
@@ -45,6 +52,7 @@ $(document).ready(function(){
  
 
   });
+
   
   $('#tab_logic tbody').on('keyup change',function(){
     //calc();
@@ -66,7 +74,7 @@ $(document).ready(function(){
   });
   
 
-});
+
 
 // function calc()
 // {
@@ -113,18 +121,20 @@ $(document).ready(function(){
   let parentnodes = sqft.parentNode.parentNode.id;
 
   let inputs = document.getElementById(parentnodes);
-  let str = inputs.getElementsByClassName('sqrft_copies')[0].value;
-  let totals = inputs.getElementsByClassName('total')[0];
+  let str = inputs.getElementsByClassName('size')[0].value;
+  let sqrfts = inputs.getElementsByClassName('sqrfts')[0];
   let qty = inputs.getElementsByClassName('qty')[0].value;
 
   var sqrft  = str.split('x');
   var height = parseInt(sqrft[0]);
   var width  = parseInt(sqrft[1]);
 
-  var sqrft_output = height * width;
+  var size = height * width;
   
-  totals.value = sqrft_output;
- //console.log(sqft);
+  sqrfts.value = size;
+
+
+
 }
 
  copies =(copy)=>{
@@ -132,35 +142,114 @@ $(document).ready(function(){
 
   let inputs = document.getElementById(parentnodes);
   let qty = inputs.getElementsByClassName('qty')[0].value;
-  let price = inputs.getElementsByClassName('price')[0].value;
-  let netvalue = inputs.getElementsByClassName('netvalue')[0];
-  let sqrft_copies = inputs.getElementsByClassName('sqrft_copies')[0].value;
-  let totals = inputs.getElementsByClassName('total')[0].value;
+  // let price = inputs.getElementsByClassName('price')[0].value;
+  // let netvalue = inputs.getElementsByClassName('netvalue')[0];
+  let size = inputs.getElementsByClassName('size')[0].value;
+  let sqrfts = inputs.getElementsByClassName('sqrfts')[0].value;
+  let totals = inputs.getElementsByClassName('total')[0];
+  
 
-  //console.log(sqrft_copies,totals)
-  if(totals === '0' && sqrft_copies === '0'){
-      netvalue.value = qty*price ;
+
+  // console.log(sqrfts*qty);
+
+  if(sqrfts === '0' && size === '0'){
+
+      let totals_sqrft = qty
+      totals.value =totals_sqrft ;
+      // netvalue.value = totals_sqrft*price ;
+
   }else{
-    netvalue.value = totals*qty*price ;
+      
+      let totals_sqrft = sqrfts*qty
+      totals.value = totals_sqrft;
+      // netvalue.value = totals_sqrft*price ;
   }
-  //netvalue.value = qty*price ;
-  // console.log(netvalue.value);
-    let totalsalesnetvalue = 0;
-
-    let rownetvalue = document.getElementsByClassName('netvalue');
-    let sub_total = document.getElementById('sub_total');
 
 
-    for (var i= 0; i<rownetvalue.length; i++){
-        totalsalesnetvalue +=parseInt(rownetvalue[i].value);
-       }
-    sub_total.value = totalsalesnetvalue;
+  // //netvalue.value = qty*price ;
+  // // console.log(netvalue.value);
+
+
+
+
+  //   let totalsalesnetvalue = 0;
+
+  //   let rownetvalue = document.getElementsByClassName('netvalue');
+  //   let rowcgst= inputs.getElementsByClassName('cgst')[0].value;
+  //   let sub_total = document.getElementById('sub_total');
+
+
+  //   for (var i= 0; i<rownetvalue.length; i++){
+  //       totalsalesnetvalue +=parseInt(rownetvalue[i].value);
+  //      }
+
+  //  console.log(rowcgst)
+  //   sub_total.value = totalsalesnetvalue;
 
 
 
 }
 
+pricecalculation=(pri)=>{
+  let parentnodes = pri.parentNode.parentNode.id;
 
+  let priseinputs = document.getElementById(parentnodes);
+  // let qty = inputs.getElementsByClassName('qty')[0].value;
+  let price = priseinputs.getElementsByClassName('price')[0].value;
+  let netvalue = priseinputs.getElementsByClassName('netvalue')[0];
+  // let size = inputs.getElementsByClassName('size')[0].value;
+  // let sqrfts = inputs.getElementsByClassName('sqrfts')[0].value;
+  let cgst = priseinputs.getElementsByClassName('cgst')[0].value;
+  let sgst = priseinputs.getElementsByClassName('sgst')[0].value;
+  let totals = priseinputs.getElementsByClassName('total')[0].value;
+
+  let  tax  = parseInt(cgst)+parseInt(sgst);
+
+  let  actual_amount= totals*price;
+
+  netvalue.value = actual_amount;
+
+
+
+
+    let totalrownetvalue = 0;
+    let totalrowcgst = 0;
+    let totalrowsgst = 0;
+
+    let rownetvalue = document.getElementsByClassName('netvalue');
+    let rowcgst = document.getElementsByClassName('cgst');
+    let rowsgst = document.getElementsByClassName('sgst');
+    let totalcgst = document.getElementById('totalcgst');
+    let totalsgst = document.getElementById('totalsgst');
+    let totaltax = document.getElementById('tax');
+    let tax_amount = document.getElementById('tax_amount');
+    let sub_total = document.getElementById('sub_total');
+    let grand_total = document.getElementById('grand_total');
+
+
+    for (var i= 0; i<rownetvalue.length; i++){
+        totalrownetvalue +=parseInt(rownetvalue[i].value);
+       }
+    for (var i= 0; i<rowcgst.length; i++){
+        totalrowcgst +=Number(rowcgst[i].value);
+       }
+    for (var i= 0; i<rowsgst.length; i++){
+        totalrowsgst +=Number(rowsgst[i].value);
+       }
+// console.log(totalrowcgst);
+    totalcgst.value = totalrowcgst;
+    totalsgst.value = totalrowsgst;
+
+    let taxs = totalrowcgst+totalrowsgst
+    totaltax.value   = taxs;
+    let taxsamount = totalrownetvalue/100*taxs;
+    tax_amount.value = taxsamount;
+    sub_total.value = totalrownetvalue;
+    grand_total.value = totalrownetvalue + taxsamount;
+
+
+
+}
 
 // function calc_total()
 // {
@@ -178,7 +267,7 @@ $(document).ready(function(){
 
 //customer details append function
 
-function customer_details(){
+customer_details=()=>{
 
       let customer_id = document.getElementById("customer");
       let customer = customer_id.options[customer_id.selectedIndex].value;
@@ -217,8 +306,10 @@ materialunitfind =(unit)=>{
 
   let inputs = document.getElementById(parentnodes);
     
-  let  unit_of_sqrft  = inputs.getElementsByClassName('sqrft_copies')[0];
+  let  unit_of_sqrft  = inputs.getElementsByClassName('size')[0];
   let  unit_of_total  = inputs.getElementsByClassName('total')[0];
+  let  cgst  = inputs.getElementsByClassName('cgst')[0];
+  let  sgst  = inputs.getElementsByClassName('sgst')[0];
 
   let material_id = inputs.getElementsByClassName('material')[0];
 
@@ -240,6 +331,8 @@ materialunitfind =(unit)=>{
 
 
        }
+      cgst.value = data.cgst;
+      sgst.value = data.sgst;
     },
     error:function(){
     }
@@ -268,10 +361,13 @@ $('#invoicedata').on('submit',function(e){
     invoiceproduct.push({ 
        "description" : $(this).find('.description').val(),
        "material" :$(this).find('.material').val(),
-       "sqrft_copies" : $(this).find('.sqrft_copies').val(),
-       "total" : $(this).find('.total').val(),
+       "size" : $(this).find('.size').val(),
+       "sqrfts" : $(this).find('.sqrfts').val(),
        "qty" : $(this).find('.qty').val(),
+       "total" : $(this).find('.total').val(),
        "price" : $(this).find('.price').val(),
+       "cgst" : $(this).find('.cgst').val(),
+       "sgst" : $(this).find('.sgst').val(),
        "netvalue" : $(this).find('.netvalue').val()
     });
   });
@@ -282,9 +378,11 @@ $('#invoicedata').on('submit',function(e){
     'date': $('#date').val(),
     'customer': $('#customer').val(),
     'sub_total': $('#sub_total').val(),
+    'totalcgst': $('#totalcgst').val(),
+    'totalsgst': $('#totalsgst').val(),
     'tax': $('#tax').val(),
     'tax_amount': $('#tax_amount').val(),
-    'total_amount': $('#total_amount').val(),
+    'grand_total': $('#grand_total').val(),
     'invoiceproduct_datas':invoiceproduct  // ALL BILL DATA ARRAY
   }
   $.ajaxSetup({
@@ -372,3 +470,39 @@ $('#invoicedata').on('submit',function(e){
 
 
 // });
+
+
+
+//print function
+
+$('#print').click(function(){
+  $('.printcontent').printThis({
+        debug: false,               // show the iframe for debugging
+        importCSS: true,            // import parent page css
+        importStyle: true,         // import style tags
+        printContainer: true,       // print outer container/$.selector
+        loadCSS: "",                // path to additional css file - use an array [] for multiple
+        pageTitle: "",              // add title to print page
+        removeInline: false,        // remove inline styles from print elements
+        removeInlineSelector: "*",  // custom selectors to filter inline styles. removeInline must be true
+        printDelay: 100,            // variable print delay
+        header: null,               // prefix to html
+        footer: null,               // postfix to html
+        base: false,                // preserve the BASE tag or accept a string for the URL
+        formValues: true,           // preserve input/form values
+        canvas: false,              // copy canvas content
+        doctypeString: '<!DOCTYPE html>', // enter a different doctype for older markup
+        removeScripts: false,       // remove script tags from print content
+        copyTagClasses: false,      // copy classes from the html & body tag
+        beforePrintEvent: null,     // callback function for printEvent in iframe
+        beforePrint: null,          // function called before iframe is filled
+        afterPrint: true      
+
+  });
+});
+
+
+
+
+
+});

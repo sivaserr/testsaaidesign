@@ -11,7 +11,7 @@ Dashboard
   $customer = DB::table('customers')->select('customers.id')->count();
   $material = DB::table('materials')->select('materials.id')->count();
   $invoices = DB::table('invoices')->select('invoices.id')->count();
-  $revenue = DB::table('invoices')->sum('invoices.total_amount');
+  $revenue = DB::table('invoices')->sum('invoices.grand_total');
   //var_dump($invoices);exit;
 
 ?>

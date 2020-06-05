@@ -44,6 +44,8 @@ class Material_Controller extends Controller
 
         $materials->material_name =$request->input('productname');
         $materials->hsn_code =$request->input('code');
+        $materials->cgst =$request->input('cgst');
+        $materials->sgst =$request->input('sgst');
         $materials->unit =$request->input('unit');
 
         $materials->save();
@@ -92,6 +94,8 @@ class Material_Controller extends Controller
 
         $materials->material_name =$request->input('productname');
         $materials->hsn_code =$request->input('code');
+        $materials->cgst =$request->input('cgst');
+        $materials->sgst =$request->input('sgst');
         $materials->unit =$request->input('unit');
 
         $materials->save();

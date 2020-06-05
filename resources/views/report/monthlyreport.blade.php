@@ -52,7 +52,7 @@ Monthly wise report
      <table class="table table-bordered monthlytable">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">S.No</th>
             <th scope="col">Invoie no</th>
             <th scope="col">Date</th>
             <th scope="col">Customer</th>
@@ -77,8 +77,8 @@ Monthly wise report
             @endif
             @endforeach
             <td>{{$Invoice->sub_total}}</td>
-            <td>{{$Invoice->tax}}</td>
-            <td>{{$Invoice->total_amount}}</td>
+            <td>{{$Invoice->total_tax}}</td>
+            <td>{{$Invoice->grand_total}}</td>
 
           <td><a href="/view-report/{{$Invoice->id}}" ><i class="fas fa-print"></i></a>
           </td>

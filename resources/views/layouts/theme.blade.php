@@ -104,6 +104,11 @@
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container-fluid">
           <div class="navbar-wrapper">
+      <div id="sidebar-btn">
+     <span></span>
+     <span></span>
+     <span></span>
+     </div>
             <div class="navbar-toggle">
               <button type="button" class="navbar-toggler">
                 <span class="navbar-toggler-bar bar1"></span>
@@ -137,7 +142,10 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
+                      <a class="dropdown-item" href="{{ route('password.change') }}">
+                          <i class="fas fa-key"></i>
+                          {{ __('Change password') }}
+                      </a>
                       <a class="dropdown-item" href="{{ route('logout') }}"
                          onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();">
@@ -211,6 +219,7 @@
   <script src="../assets/demo/demo.js"></script>
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{ asset('js/invoice.js') }}" defer></script>
+  <script src="{{ asset('js/printThis.js') }}" defer></script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/assets-for-demo/js/demo.js

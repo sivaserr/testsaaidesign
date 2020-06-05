@@ -20,6 +20,14 @@ Material
             <label for="inputcode">HSN/SAC Code</label>
             <input type="text" class="form-control" id="code" name="code" placeholder="HSN/SAC code" required>
         </div>
+        <div class="form-group">
+            <label for="inputcode">CGST(%)</label>
+            <input type="text" class="form-control" id="cgst" name="cgst" placeholder="CGST " required>
+        </div>
+        <div class="form-group">
+            <label for="inputcode">SGST(%)</label>
+            <input type="text" class="form-control" id="SGST" name="sgst" placeholder="SGST code" required>
+        </div>
         <div class="units">
         <label for="inputunit">Unit</label>
         <select name="unit" id="unit" class="form-control">

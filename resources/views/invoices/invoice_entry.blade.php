@@ -76,7 +76,7 @@ Invoice Entry
            <select name="customer" id="customer" class="form-control customer" onchange="customer_details()">
               <option>Choose</option>  
           @foreach($customers as $customer)
-              <option value="{{$customer->id}}">{{$customer->customer_name}}-{{$customer->company_name}}</option>
+        <option value="{{$customer->id}}">{{$customer->customer_name}}-{{$customer->company_name}}</option>
           @endforeach
            </select>
          </div>
@@ -122,13 +122,16 @@ Invoice Entry
       <table class="table table-bordered table-hover" id="tab_logic">
         <thead>
           <tr>
-            <th class="text-center"> # </th>
+            <th class="text-center"> S.No </th>
             <th class="text-center"> Description</th>
             <th class="text-center"> Product </th>
-            <th class="text-center"> sqrft/copies </th>
-            <th class="text-center"> Total(sqrft/copies)</th>
+            <th class="text-center"> Size</th>
+            <th class="text-center"> Sqrft</th>
             <th class="text-center"> Qty </th>
+            <th class="text-center"> Total(sq/cp)</th>
             <th class="text-center"> Price </th>
+            <th class="text-center"> CGST(%) </th>
+            <th class="text-center"> SGST(%) </th>
             <th class="text-center"> Net-value </th>
           </tr>
         </thead>
@@ -144,11 +147,14 @@ Invoice Entry
               @endforeach
               </select>
               </td>
-            <td><input type="text" name='sqrft_copies ' id="sqrft_copies"  class="form-control sqrft_copies" step="0" min="0" oninput="sqrft(this)" value="0" /></td>
+            <td><input type="text" name='size ' id="size"  class="form-control size" step="0" min="0" oninput="sqrft(this)" value="0" /></td>
+            <td><input type="number" name='sqrfts' id="sqrfts" placeholder='0.00' class="form-control sqrfts" step="0" min="0"  value="0" readonly/></td>
+            <td><input type="number" name='qty' placeholder='Enter Qty' class="form-control qty" step="0" min="0" oninput="copies(this)"/></td>
             <td><input type="number" name='total' id="totals" placeholder='0.00' class="form-control total" step="0" min="0"  value="0" readonly/></td>
-            <td><input type="number" name='qty' placeholder='Enter Qty' class="form-control qty" step="0" min="0" /></td>
-            <td><input type="number" name='price' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0" oninput="copies(this)"
-              /></td>
+            <td><input type="number" name='price' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0" oninput="pricecalculation(this)"/></td>
+            <td><input type="number" name='cgst' id="cgst" placeholder='0.00' class="form-control cgst" value="0"readonly/></td>
+            <td><input type="number" name='sgst' placeholder='0.00' class="form-control sgst" value="0" readonly/></td>
+
             <td><input type="number" name='netvalue' placeholder='0.00' class="form-control netvalue" readonly/></td>
           </tr>
           <tr id='addr1'></tr>
@@ -164,7 +170,35 @@ Invoice Entry
     </div>
   </div>
   <div class="row clearfix" style="margin-top:20px">
-    <div class="col-sm-8"></div>
+    <div class="col-sm-8">
+          <div class="pull-left">
+      <table class="table table-bordered table-hover" id="tab_logic_total">
+        <tbody>
+          <tr>
+            <th class="text-center">CGST</th>
+            <td class="text-center"><div class="input-group mb-2 mb-sm-0">
+                <input type="number" name='totalcgst'  class="form-control totalcgst" id="totalcgst" placeholder="0" readonly>
+                <div class="input-group-addon">%</div>
+              </div></td>
+          </tr>
+          <tr>
+            <th class="text-center">SGST</th>
+            <td class="text-center"><div class="input-group mb-2 mb-sm-0">
+                <input type="number" name='totalsgst' class="form-control totalsgst" id="totalsgst" placeholder="0" readonly>
+                <div class="input-group-addon">%</div>
+              </div></td>
+          </tr>
+          <tr>
+            <th class="text-center">Total Tax</th>
+            <td class="text-center"><div class="input-group mb-2 mb-sm-0">
+              <input type="number" name='tax' id="tax" placeholder='0.00' class="form-control" readonly/>
+            <div class="input-group-addon">%</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
     <div class="pull-right col-md-4">
       <table class="table table-bordered table-hover" id="tab_logic_total">
         <tbody>
@@ -173,19 +207,12 @@ Invoice Entry
             <td class="text-center"><input type="number" name='sub_total' id="sub_total" placeholder='0.00' class="form-control sub_total" id="sub_total" readonly/></td>
           </tr>
           <tr>
-            <th class="text-center">Tax</th>
-            <td class="text-center"><div class="input-group mb-2 mb-sm-0">
-                <input type="number" name='tax' id="tax" class="form-control tax" id="tax" placeholder="0">
-                <div class="input-group-addon">%</div>
-              </div></td>
-          </tr>
-          <tr>
             <th class="text-center">Tax Amount</th>
             <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly/></td>
           </tr>
           <tr>
             <th class="text-center">Grand Total</th>
-            <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly/></td>
+            <td class="text-center"><input type="number" name='grand_total' id="grand_total" placeholder='0.00' class="form-control" readonly/></td>
           </tr>
         </tbody>
       </table>

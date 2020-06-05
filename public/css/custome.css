@@ -1,7 +1,98 @@
+/*toggle navbar*/
+.sidebar{
+   transition:all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+}
+a.navbar-brand {
+    margin-left: 25px;
+}
+#sidebar-btn{
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 23px;
+  position: absolute;
+  top: 0px;
+left: 0px;
+
+}
+
+#sidebar-btn span{
+  height: 2px;
+  background: #bfd630!important;
+  margin-bottom: 5px;
+  display: block;
+
+}
+#sidebar-btn span:nth-child(2){
+  width: 75%;
+}
+#sidebar-btn span:nth-child(3){
+  width: 50%;
+}
+.sidebar.visible{
+  left: -190px;
+transition:all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+}
+.sidebar.visible .logo:after{
+right: 0px;
+}
+.sidebar.visible .simple-text.logo-mini{
+  float: right;
+}
+
+.sidebar.visible i{
+  position: relative;
+float: right;
+transition:all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1)!important;
+  left: 10px;
+}
+
+#main-panel.bodycollapse{
+  position: relative;
+transition:all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+width: calc(100%  - 70px)!important;
+
+}
+
+@media(max-width: 768px){
+  #sidebar-btn{
+    display: none!important;
+}
+.sidebar.visible{
+  left: 0px;
+}
+.sidebar.visible .logo:after{
+right: 15px;
+}
+.sidebar.visible .simple-text.logo-mini{
+  float: left;
+}
+
+.sidebar.visible i{
+  position: relative;
+float: left;
+transition:all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1)!important;
+  left: 0px;
+}
+
+#main-panel.bodycollapse{
+  position: relative;
+transition:all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+width: calc(100%  - 0px)!important;
+
+}
+
+}
+
+
 .main-panel > .content {
     height: 100vh;
 }
-
+.table-responsive {
+    overflow-y: hidden!important;
+}
 .alert.alert-success {
     background-color: #bfd630!important;
     border: none;
