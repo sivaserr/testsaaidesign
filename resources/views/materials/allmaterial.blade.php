@@ -1,11 +1,16 @@
 @extends('layouts.theme')
 
 @section('headline')
-All Customer
+All Materials
 @endsection
 @section('content')
+<?php 
+  $units = DB::table('units')->select('units.*')->get();
+?>
   <div class="customerlist">
-  	<table class="table">
+        <div class="table-responsive ">
+
+  	<table class="table table-bordered">
     <thead>
       <tr>
         <th>S.no</th>
@@ -23,7 +28,11 @@ All Customer
         <td>{{$id}}</td>
         <td>{{$material->material_name}}</td>
         <td>{{$material->hsn_code}}</td>
-        <td>{{$material->unit}}</td>
+        @foreach($units as $unit)
+        @if($material->unit === $unit->id)
+        <td>{{$unit->unit_name}}</td>
+        @endif
+        @endforeach
         <td><a href="/material-edit/{{$material->id}}"><i class="fas fa-edit"></i> <span class="glyphicon glyphicon-edit"></span></a></td>
         <td><a href="/material/{{$material->id}}"><i class="fas fa-trash-alt"></i></a></td>
       </tr>
@@ -31,5 +40,6 @@ All Customer
          @endforeach
     </tbody>
   </table>
+</div>
   </div>
 @endsection

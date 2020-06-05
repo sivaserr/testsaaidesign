@@ -25,6 +25,7 @@ class formvalidation extends FormRequest
     {
         return [
             'gstno' => 'required|unique:customers,gst_no',
+            'phoneno' => 'required|max:10,phone_no',
         ];
     }
 }

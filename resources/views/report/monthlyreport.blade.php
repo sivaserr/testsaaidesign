@@ -1,10 +1,12 @@
 @extends('layouts.theme')
 
 @section('headline')
-Report view
+Monthly wise report
 @endsection
  <style>
-
+  .main-panel > .content {
+    height: auto!important;
+}
 .monthlytable {
     border: 1px solid #dee2e6;
 }

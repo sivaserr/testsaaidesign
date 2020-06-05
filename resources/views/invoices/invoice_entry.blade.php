@@ -4,7 +4,9 @@
 Invoice Entry
 @endsection
  <style>
-  
+  .main-panel > .content {
+    height: auto!important;
+}
   .invoice_control {
     border: none;
     background: transparent;

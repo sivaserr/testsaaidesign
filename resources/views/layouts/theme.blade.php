@@ -39,7 +39,7 @@
             <img src="../assets/img/sailogo1.png">
           </div>
         </a>
-        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="/dashboard" class="simple-text logo-normal">
           Sai Design
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
@@ -69,7 +69,7 @@
           <li class="{{'material' == request()->path() ? 'active' : ''}}">
             <a href="/material">
               <i class="nc-icon nc-tile-56"></i>
-              <p>Add Matirial</p>
+              <p>Add Material</p>
             </a>
           </li>
           <li class="{{'all-material' == request()->path() ? 'active' : ''}}">
@@ -197,7 +197,8 @@
 
 
 
-      <script src="../assets/js/core/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>

@@ -54,7 +54,7 @@
                         </div>
 
                         <div>
-                            <a href="#" class="txt3">
+                            <a href="{{url('forgot_password')}}" class="txt3">
                                 Forgot Password?
                             </a>
                         </div>

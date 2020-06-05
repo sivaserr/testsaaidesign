@@ -60,6 +60,7 @@ Report view
 
 <?php
 $invoice_products = DB::table('invoice_products')->select('invoice_products.*')->get();
+$customers = DB::table('customers')->select('customers.*')->get();
 $materials = DB::table('materials')->select('materials.*')->get();
 
 ?>
@@ -96,10 +97,14 @@ $materials = DB::table('materials')->select('materials.*')->get();
   
   <div class="col-sm-6">
           <h6 class="mb-3">To:</h6>
-      <div>Sai Design</div>
-      <div>Empire Arcade Opp New Bus Stand,Salem</div>
-      <div>GSTIN/UIN:33AWIPJ4592Q1ZU</div>
-      <div>State Name: Tamil Nadu,Code:33</div>
+    @foreach($customers as $customer)
+    @if($invoice->customer_id === $customer->id)
+      <div>{{$customer->customer_name}}</div>
+      <div>{{$customer->address}}</div>
+      <div>GSTIN/UIN:{{$customer->gst_no}}</div>
+      <div>State Name:{{$customer->state}}</div>
+      @endif
+    @endforeach
   </div>
   <div class="col-sm-6">
   </div>

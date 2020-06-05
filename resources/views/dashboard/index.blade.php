@@ -10,6 +10,7 @@ Dashboard
 <?php 
   $customer = DB::table('customers')->select('customers.id')->count();
   $material = DB::table('materials')->select('materials.id')->count();
+  $invoices = DB::table('invoices')->select('invoices.id')->count();
   $revenue = DB::table('invoices')->sum('invoices.total_amount');
   //var_dump($invoices);exit;
 
@@ -110,7 +111,7 @@ Dashboard
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Invoices</p>
-                      <p class="card-title">+45K<p>
+                      <p class="card-title">{{$invoices}}<p>
                     </div>
                   </div>
                 </div>

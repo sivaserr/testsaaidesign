@@ -61,7 +61,7 @@ $(document).ready(function(){
     
     tax_amount.value = tax_sum;
 
-    total_amount.value = sub_total - tax_sum ;
+    total_amount.value = parseInt(sub_total) + parseInt(tax_sum)  ;
 
   });
   

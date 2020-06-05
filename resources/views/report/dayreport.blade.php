@@ -1,7 +1,7 @@
 @extends('layouts.theme')
 
 @section('headline')
-Report view
+Day wise report
 @endsection
  <style>
 
