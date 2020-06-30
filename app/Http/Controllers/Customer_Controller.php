@@ -54,6 +54,7 @@ class Customer_Controller extends Controller
         $customers->company_name = $request->input('companyname');
         $customers->gst_no = $request->input('gstno');
         $customers->state = $request->input('state');
+        $customers->code = $request->input('code');
 
         $customers->save();
         
@@ -104,6 +105,7 @@ class Customer_Controller extends Controller
         $customers->company_name = $request->input('companyname');
         $customers->gst_no = $request->input('gstno');
         $customers->state = $request->input('state');
+        $customers->code = $request->input('code');
 
         $customers->save();
         

@@ -32,7 +32,7 @@ Material Edit
         <div class="units">
         <label for="inputunit">Unit</label>
         <select name="unit" id="unit" class="form-control">
-            <option>{{$material->unit}}</option>
+            <option>{{$material->unit_name}}</option>
               @foreach($units as $unit)
                 <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
               @endforeach

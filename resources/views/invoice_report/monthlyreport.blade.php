@@ -1,16 +1,14 @@
 @extends('layouts.theme')
 
 @section('headline')
-Day wise report
+Monthly wise report
 @endsection
  <style>
-
-.daytable {
-    border: 1px solid #dee2e6;
+  .main-panel > .content {
+    height: auto!important;
 }
-
-.dayreportview {
-    margin: 60px 0px!important;
+.monthlytable {
+    border: 1px solid #dee2e6;
 }
  </style>
 
@@ -22,41 +20,37 @@ Day wise report
    $invoices = DB::table('invoices')->latest('id')->first();
 
 ?>
-<div class="dayreportview">
 
-  <form method="POST" action="/day-report">
-
-    {{ csrf_field() }}
-
-    <div class="row">
-      <div class="col-sm-2"></div>
+<form method="POST" action="/monthly-report">
+  {{ csrf_field() }}
+  <div class="row">
+    <div class="col-sm-4">
+        <div class="form-group filterdate">
+            <label for="fromDate">From Date</label>
+            <input type="Date" class="form-control" id="fromDate" name="fromdate" value="">
+          </div>
+    </div>
       <div class="col-sm-4">
-   <div class="form-group">
-    <label for="exampleInputEmail1">Date</label>
-    <input type="date" class="form-control" name="date" id="date" aria-describedby="date">
-   </div>       
-      </div>
-      <div class="col-sm-4">
+        <div class="form-group filterdate">
+            <label for="toDate">To Date</label>
+            <input type="Date" class="form-control" id="toDate" name="todate" value="">
+          </div>
+    </div>
+    <div class="col-sm-4">
         <div class="daybutton">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-      </div>
-            <div class="col-sm-2"></div>
-
     </div>
+  </div>
 
 
 </form>
 
-</div>
-
-
-
 
       <div class="table-responsive">
+            @if(count($Invoices) > 0)
 
-
-     <table class="table table-bordered daytable">
+     <table class="table table-bordered monthlytable">
         <thead>
           <tr>
             <th scope="col">S.No</th>
@@ -71,13 +65,12 @@ Day wise report
         </thead>
         <tbody>
           <?php $id = 1?>
-            @if(count($Invoices) > 0)
             @foreach($Invoices as $Invoice)
 
           <tr>
           <th scope="row">{{$id}}</th>
             <td>{{$Invoice->invoice_no}}</td>
-            <td>{{$Invoice->date}}</td>
+            <td>{{Carbon\Carbon::parse($Invoice->date)->format('d-m-Y')}}</td>
             @foreach($customers as $customer)
             @if($customer->id === $Invoice->customer_id)
             <td>{{$customer->customer_name}}</td>
@@ -87,7 +80,7 @@ Day wise report
             <td>{{$Invoice->total_tax}}</td>
             <td>{{$Invoice->grand_total}}</td>
 
-          <td><a href="view-report/{{$Invoice->id}}"><i class="fas fa-print"></i></a>
+          <td><a href="/view-report/{{$Invoice->id}}" ><i class="fas fa-print"></i></a>
           </td>
           </tr>
           <?php $id++;?>
@@ -95,10 +88,11 @@ Day wise report
           @endforeach
 
 
-          @endif
 
         </tbody>
       </table>
-    </div>
+          @endif
+
+</div>
 
 @endsection

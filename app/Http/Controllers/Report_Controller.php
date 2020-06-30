@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Invoices;
+use App\Customers;
+use PDF;
 class Report_Controller extends Controller
 {
     /**
@@ -19,12 +21,25 @@ class Report_Controller extends Controller
 
         $data['Invoices'] = [];
     	
-    	return view('report.dayreport',$data);
+    	return view('invoice_report.dayreport',$data);
     
     }
     public function monthlyreport(){
         $data['Invoices'] = [];
-    	return view('report.monthlyreport',$data);
+    	return view('invoice_report.monthlyreport',$data);
+    
+    }
+
+    public function purchasedayreport(){
+
+        $data['Purchases'] = [];
+      
+      return view('purchase_report.dayreport',$data);
+    
+    }
+    public function purchasemonthlyreport(){
+        $data['Purchases'] = [];
+      return view('purchase_report.monthlyreport',$data);
     
     }
 

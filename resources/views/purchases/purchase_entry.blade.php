@@ -1,7 +1,7 @@
 @extends('layouts.theme')
 
 @section('headline')
-Invoice Entry
+Purchase Entry
 @endsection
  <style>
   .main-panel > .content {
@@ -42,14 +42,13 @@ Invoice Entry
 
 <?php
 
-   $customers = DB::table('customers')->select('customers.*')->get();
-   $invoices = DB::table('invoices')->latest('id')->first();
-
+   $suppliers = DB::table('suppliers')->select('suppliers.*')->get();
+   $materials = DB::table('materials')->select('materials.*')->get();
+   $purchases = DB::table('purchases')->latest('id')->first();
 ?>
 
- <form id="invoicedata" action="{{ route('invoice')}} " method="POST">
-           {{ csrf_field()}}
-
+<form id="purchasedata" action="{{ route('purchase')}} " method="POST">
+    {{ csrf_field()}}
 <div class="customer_details">
   <div class="row">
     <div class="col-sm-3"></div>
@@ -67,16 +66,16 @@ Invoice Entry
         <div class="col-sm-4">
           <div class="form-group">
             <label for="name">Invoice no</label>
-          <input type="text" class="form-control" name="invoiceno" id="invoiceno" aria-describedby="name" placeholder="Enter invoice no" value="SAAI/{{$invoices->id+1}}" readonly>
+          <input type="text" class="form-control" name="invoiceno" id="invoiceno" aria-describedby="name" placeholder="Enter invoice no" value="SAAI/{{$purchases->id+1}}" readonly>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="customer_status">
-            <label for="customer">Customer</label>
-           <select name="customer" id="customer" class="form-control customer" onchange="customer_details()">
+          <div class="supplier_status">
+            <label for="supplier">Supplier</label>
+           <select name="supplier" id="supplier" class="form-control supplier" onchange="supplier_details()">
               <option>Choose</option>  
-          @foreach($customers as $customer)
-        <option value="{{$customer->id}}">{{$customer->customer_name}}-{{$customer->company_name}}</option>
+          @foreach($suppliers as $supplier)
+        <option value="{{$supplier->id}}">{{$supplier->supplier_name}}-{{$supplier->company_name}}</option>
           @endforeach
            </select>
          </div>
@@ -113,7 +112,6 @@ Invoice Entry
       </div>
 
 </div>
-
 
 <div class="amountentry">
   <div class="row clearfix">
@@ -152,13 +150,13 @@ Invoice Entry
             <td><input type="number" name='hsn' id="hsn" placeholder='0.00' class="form-control hsn" step="0" min="0"  value="0" readonly/></td>
             <td><input type="text" name='size ' id="size"  class="form-control size" step="0" min="0" value="0" /></td>
             <td><input type="number" name='qty' placeholder='Enter Qty' class="form-control qty" step="0" min="0" oninput="copies(this)"/></td>
-            <td><input type="number" name='total' id="totals" placeholder='0.00' class="form-control total" step="0" min="0"  value="0" readonly/></td>
-            <td><input type="text" name='price' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0" value="0" oninput="pricecalculation(this)"/></td>
-            <td><input type="number" name='cgst' id="cgst" placeholder='0.00' class="form-control cgst" value="0"readonly/></td>
-            <td><input type="number" name='sgst' placeholder='0.00' class="form-control sgst" value="0" readonly/></td>
+            <td><input type="number" name='total' id="totals"  class="form-control total" step="0" min="0"  value="0" readonly/></td>
+            <td><input type="text" name='price' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0" oninput="pricecalculation(this)"/></td>
+            <td><input type="text" name='cgst' id="cgst" placeholder='0.00' class="form-control cgst" value="0"readonly/></td>
+            <td><input type="text" name='sgst' placeholder='0.00' class="form-control sgst" value="0" readonly/></td>
 
-            <td><input type="number" name='netvalue' placeholder='0.00' class="form-control netvalue" readonly/></td>
-            <td><input type="number" name='rowtaxamount' placeholder='0.00' id="rowtaxamount" class="form-control rowtaxamount" readonly/></td>
+            <td><input type="text" name='netvalue' placeholder='0.00' class="form-control netvalue" value="0" readonly/></td>
+            <td><input type="text" name='rowtaxamount' placeholder='0.00' id="rowtaxamount" class="form-control rowtaxamount" value="0"  readonly/></td>
           </tr>
           <tr id='addr1'></tr>
         </tbody>
@@ -168,8 +166,8 @@ Invoice Entry
   </div>
   <div class="row clearfix">
     <div class="col-md-12">
-      <a href="#" id="add_row" class="btn btn-default pull-left">Add Row</a>
-      <a href="#" id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+      <a href="#" id="add_rowpurchase" class="btn btn-default pull-left">Add Row</a>
+      <a href="#" id='delete_rowpurchase' class="pull-right btn btn-default">Delete Row</a>
     </div>
   </div>
   <div class="row clearfix" style="margin-top:20px">
@@ -226,6 +224,4 @@ Invoice Entry
 <button type="submit" class="btn btn-primary">Save</button>
 </div>
  </form>
-
-
 @endsection

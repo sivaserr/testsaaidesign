@@ -1,19 +1,3 @@
- 
-//Success Message
-      $(document).ready(function(){
-      $('.alert-success').fadeIn().delay(1000).fadeOut();
-      });
-
-//toggle menu
-
-            $('#sidebar-btn').on('click', function () {
-                $('.sidebar').toggleClass('visible');
-                $('#main-panel').toggleClass('bodycollapse');
-                
-               
-            });
-
-
 //Invoice Entry Page
 $(document).ready(function(){
     var i=1;
@@ -22,17 +6,25 @@ $(document).ready(function(){
         b=i-1;
         
         let netvalueParent = "addr"+j;
-        let _net = document.getElementById(netvalueParent);
-        let netValue = _net.getElementsByClassName("netvalue")[0];
-        //console.log(netValue)
-        if(netValue.value !== ''){
-          $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
-          $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-          i++; 
-          j++;  
+        //console.log(netvalueParent)
+        let net = document.getElementById(netvalueParent);
+        let netValue = net.getElementsByClassName("netvalue")[0];
+         if(netValue){
+           if(netValue.value !== ''){
+            $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
+            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+            i++; 
+            j++;  
+          }else{
+            alert("Field required");
+          } 
         }else{
-          alert("Please fill the required field");
+          $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
+            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+            i++; 
+            j++;
         }
+        
         
 
     });
@@ -42,12 +34,26 @@ $(document).ready(function(){
       let icalc = i-1;
       let doc= document.getElementById("addr"+icalc);
       let netvalue = doc.getElementsByClassName('netvalue')[0];
+      let cgst = doc.getElementsByClassName('cgst')[0];
+      let sgst = doc.getElementsByClassName('sgst')[0];
+      let totalcgst = document.getElementById('totalcgst');
+      let totalsgst = document.getElementById('totalsgst');
+      let rowtaxamountss = document.getElementById('rowtaxamount');
       let sub_total = document.getElementById('sub_total');
+      let tax = document.getElementById('tax');
+      let tax_amount = document.getElementById('tax_amount');
+      let grand_total = document.getElementById('grand_total');
 
-      sub_total.value -=netvalue.value
-
+      tax_amount.value -=rowtaxamountss.value;
+      sub_total.value -=netvalue.value;
+      // tax.value -=cgst.value; 
+      // tax.value -=sgst.value; 
+      // tax_amount.value = sub_total.value/100*tax.value;
+      grand_total.value = parseInt(sub_total.value) - parseInt(tax_amount.value);
+      console.log();
     $("#addr"+(i-1)).html('');
     i--;
+    j--;
     }
  
 
@@ -58,20 +64,20 @@ $(document).ready(function(){
     //calc();
   });
 
-  $('#tax').on('keyup change',function(){
+  // $('#tax').on('keyup change',function(){
    
-    let sub_total = document.getElementById('sub_total').value;
-    let tax = document.getElementById('tax').value;
-    let tax_amount = document.getElementById('tax_amount');
-    let total_amount = document.getElementById('total_amount');
+  //   let sub_total = document.getElementById('sub_total').value;
+  //   let tax = document.getElementById('tax').value;
+  //   let tax_amount = document.getElementById('tax_amount');
+  //   let total_amount = document.getElementById('total_amount');
 
-    let tax_sum = sub_total/100*tax; 
+  //   let tax_sum = sub_total/100*tax; 
     
-    tax_amount.value = tax_sum;
+  //   tax_amount.value = tax_sum;
 
-    total_amount.value = parseInt(sub_total) + parseInt(tax_sum)  ;
+  //   total_amount.value = parseInt(sub_total) + parseInt(tax_sum)  ;
 
-  });
+  // });
   
 
 
@@ -117,50 +123,63 @@ $(document).ready(function(){
 //     });
 // }
 
- sqrft =(sqft)=>{
-  let parentnodes = sqft.parentNode.parentNode.id;
+//  sqrft =(sqft)=>{
+//   let parentnodes = sqft.parentNode.parentNode.id;
 
-  let inputs = document.getElementById(parentnodes);
-  let str = inputs.getElementsByClassName('size')[0].value;
-  let sqrfts = inputs.getElementsByClassName('sqrfts')[0];
-  let qty = inputs.getElementsByClassName('qty')[0].value;
+//   let inputs = document.getElementById(parentnodes);
+//   let str = inputs.getElementsByClassName('size')[0].value;
+//   let sqrfts = inputs.getElementsByClassName('sqrfts')[0];
+//   let qty = inputs.getElementsByClassName('qty')[0].value;
 
-  var sqrft  = str.split('x');
-  var height = parseInt(sqrft[0]);
-  var width  = parseInt(sqrft[1]);
+//   var sqrft  = str.split('x');
+//   var height = parseInt(sqrft[0]);
+//   var width  = parseInt(sqrft[1]);
 
-  var size = height * width;
+//   var size = height * width;
   
-  sqrfts.value = size;
+//   sqrfts.value = size;
 
 
 
-}
+// }
 
  copies =(copy)=>{
   let parentnodes = copy.parentNode.parentNode.id;
 
   let inputs = document.getElementById(parentnodes);
+  let str = inputs.getElementsByClassName('size')[0].value;
+  let units_id = inputs.getElementsByClassName('units_id')[0].value;
+
+
   let qty = inputs.getElementsByClassName('qty')[0].value;
   // let price = inputs.getElementsByClassName('price')[0].value;
   // let netvalue = inputs.getElementsByClassName('netvalue')[0];
   let size = inputs.getElementsByClassName('size')[0].value;
-  let sqrfts = inputs.getElementsByClassName('sqrfts')[0].value;
+  // let sqrfts = inputs.getElementsByClassName('sqrfts')[0];
   let totals = inputs.getElementsByClassName('total')[0];
-  
 
+
+  var sqrft  = str.split('x');
+  var height = parseInt(sqrft[0]);
+  var width  = parseInt(sqrft[1]);
+  
+ 
 
   // console.log(sqrfts*qty);
 
-  if(sqrfts === '0' && size === '0'){
+  if(size === '0'){
 
-      let totals_sqrft = qty
+      let totals_sqrft = qty;
       totals.value =totals_sqrft ;
       // netvalue.value = totals_sqrft*price ;
 
+  }else if(units_id === '3'){
+    
+    let totals_sqrft = qty;
+    totals.value =totals_sqrft ;
   }else{
-      
-      let totals_sqrft = sqrfts*qty
+      var onesqrft= height * width;
+      let totals_sqrft = onesqrft*qty
       totals.value = totals_sqrft;
       // netvalue.value = totals_sqrft*price ;
   }
@@ -197,25 +216,30 @@ pricecalculation=(pri)=>{
   // let qty = inputs.getElementsByClassName('qty')[0].value;
   let price = priseinputs.getElementsByClassName('price')[0].value;
   let netvalue = priseinputs.getElementsByClassName('netvalue')[0];
+  let rowtaxamount = priseinputs.getElementsByClassName('rowtaxamount')[0];
   // let size = inputs.getElementsByClassName('size')[0].value;
   // let sqrfts = inputs.getElementsByClassName('sqrfts')[0].value;
   let cgst = priseinputs.getElementsByClassName('cgst')[0].value;
   let sgst = priseinputs.getElementsByClassName('sgst')[0].value;
   let totals = priseinputs.getElementsByClassName('total')[0].value;
 
-  let  tax  = parseInt(cgst)+parseInt(sgst);
+  let  tax  = parseFloat(cgst)+parseFloat(sgst);
 
   let  actual_amount= totals*price;
-
+  let  rowtaxamounts= actual_amount/100*tax;
+  
   netvalue.value = actual_amount;
+  rowtaxamount.value = rowtaxamounts;
 
 
 
 
     let totalrownetvalue = 0;
-    let totalrowcgst = 0;
-    let totalrowsgst = 0;
+    let totaltaxamount = 0;
+    // let totalrowcgst = 0;
+    // let totalrowsgst = 0;
 
+    let rowntotaltaxamount = document.getElementsByClassName('rowtaxamount');
     let rownetvalue = document.getElementsByClassName('netvalue');
     let rowcgst = document.getElementsByClassName('cgst');
     let rowsgst = document.getElementsByClassName('sgst');
@@ -227,25 +251,30 @@ pricecalculation=(pri)=>{
     let grand_total = document.getElementById('grand_total');
 
 
+    for (var i= 0; i<rowntotaltaxamount.length; i++){
+        totaltaxamount +=parseFloat(rowntotaltaxamount[i].value);
+
+       }
     for (var i= 0; i<rownetvalue.length; i++){
         totalrownetvalue +=parseInt(rownetvalue[i].value);
        }
-    for (var i= 0; i<rowcgst.length; i++){
-        totalrowcgst +=Number(rowcgst[i].value);
-       }
-    for (var i= 0; i<rowsgst.length; i++){
-        totalrowsgst +=Number(rowsgst[i].value);
-       }
-// console.log(totalrowcgst);
-    totalcgst.value = totalrowcgst;
-    totalsgst.value = totalrowsgst;
+//     for (var i= 0; i<rowcgst.length; i++){
+//         totalrowcgst +=Number(rowcgst[i].value);
+//        }
+//     for (var i= 0; i<rowsgst.length; i++){
+//         totalrowsgst +=Number(rowsgst[i].value);
+//        }
+// // console.log(totalrowcgst);
+//     totalcgst.value = totalrowcgst;
+//     totalsgst.value = totalrowsgst;
 
-    let taxs = totalrowcgst+totalrowsgst
-    totaltax.value   = taxs;
-    let taxsamount = totalrownetvalue/100*taxs;
-    tax_amount.value = taxsamount;
+//     let taxs = totalrowcgst+totalrowsgst
+//     totaltax.value   = taxs;
+//     let taxsamount = totalrownetvalue/100*taxs;
+//     tax_amount.value = taxsamount;
+    tax_amount.value = totaltaxamount;
     sub_total.value = totalrownetvalue;
-    grand_total.value = totalrownetvalue + taxsamount;
+    grand_total.value = totalrownetvalue + totaltaxamount;
 
 
 
@@ -306,6 +335,8 @@ materialunitfind =(unit)=>{
 
   let inputs = document.getElementById(parentnodes);
     
+  let  hsn  = inputs.getElementsByClassName('hsn')[0];
+  let  units_id  = inputs.getElementsByClassName('units_id')[0];
   let  unit_of_sqrft  = inputs.getElementsByClassName('size')[0];
   let  unit_of_total  = inputs.getElementsByClassName('total')[0];
   let  cgst  = inputs.getElementsByClassName('cgst')[0];
@@ -324,6 +355,9 @@ materialunitfind =(unit)=>{
             
             unit_of_sqrft.enabled = true;
             unit_of_sqrft.disabled = false;
+       }else if(data.unit === 3){
+                    unit_of_sqrft.enabled = true;
+            unit_of_sqrft.disabled = false;
        }
        else{
             unit_of_sqrft.disabled = true;
@@ -331,6 +365,8 @@ materialunitfind =(unit)=>{
 
 
        }
+      units_id.value = data.unit;
+      hsn.value = data.hsn_code;
       cgst.value = data.cgst;
       sgst.value = data.sgst;
     },
@@ -361,14 +397,15 @@ $('#invoicedata').on('submit',function(e){
     invoiceproduct.push({ 
        "description" : $(this).find('.description').val(),
        "material" :$(this).find('.material').val(),
+       "hsn" : $(this).find('.hsn').val(),
        "size" : $(this).find('.size').val(),
-       "sqrfts" : $(this).find('.sqrfts').val(),
        "qty" : $(this).find('.qty').val(),
        "total" : $(this).find('.total').val(),
        "price" : $(this).find('.price').val(),
        "cgst" : $(this).find('.cgst').val(),
        "sgst" : $(this).find('.sgst').val(),
-       "netvalue" : $(this).find('.netvalue').val()
+       "netvalue" : $(this).find('.netvalue').val(),
+       "rowtaxamount": $('#rowtaxamount').val()
     });
   });
 
@@ -378,9 +415,9 @@ $('#invoicedata').on('submit',function(e){
     'date': $('#date').val(),
     'customer': $('#customer').val(),
     'sub_total': $('#sub_total').val(),
-    'totalcgst': $('#totalcgst').val(),
-    'totalsgst': $('#totalsgst').val(),
-    'tax': $('#tax').val(),
+    // 'totalcgst': $('#totalcgst').val(),
+    // 'totalsgst': $('#totalsgst').val(),
+    // 'tax': $('#tax').val(),
     'tax_amount': $('#tax_amount').val(),
     'grand_total': $('#grand_total').val(),
     'invoiceproduct_datas':invoiceproduct  // ALL BILL DATA ARRAY
@@ -499,6 +536,28 @@ $('#print').click(function(){
         afterPrint: true      
 
   });
+});
+
+
+
+
+
+$(function () {
+
+    var specialElementHandlers = {
+        '#editor': function (element,renderer) {
+            return true;
+        }
+    };
+ $('#pdf').click(function () {
+        var doc = new jsPDF('p','pt', 'a4', true);
+        doc.fromHTML(
+            $('#target').html(), 15, 15, 
+            { 'width': 170, 'elementHandlers': specialElementHandlers }, 
+            function(){ doc.save('sample-file.pdf'); }
+        );
+
+    });  
 });
 
 

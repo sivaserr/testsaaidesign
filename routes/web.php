@@ -26,6 +26,16 @@ Route::get('/dashboard', 'HomeController@index')->name('home');
 Route::get('/change-password','Auth\ChangePasswordController@index')->name('password.change');
 Route::post('/change-password','Auth\ChangePasswordController@changePassword')->name('password.update');
 
+//Suppliers
+Route::get('/supplier', 'Supplier_Controller@index')->name('supplier');
+Route::post('/supplier', 'Supplier_Controller@store')->name('supplier');
+Route::get('/all-supplier', 'Supplier_Controller@show')->name('all-supplier');
+Route::get('/supplier-edit/{id}', 'Supplier_Controller@edit')->name('supplier-edit');
+Route::put('/supplier-update/{id}', 'Supplier_Controller@update')->name('supplier-update');
+Route::get('/supplier/{id}', 'Supplier_Controller@destroy')->name('supplier-delete');
+
+
+
 //Customers
 Route::get('/customer', 'Customer_Controller@index')->name('customer');
 Route::post('/customer', 'Customer_Controller@store')->name('customer');
@@ -50,16 +60,30 @@ Route::get('/invoice-entery', 'Invoice_Controller@index')->name('invoice');
 Route::get('/invoice-entery', 'Invoice_Controller@allmaterial')->name('all-material');
 Route::post('/invoice-entery', 'Invoice_Controller@store')->name('invoice');
 
-//Report view
+Route::get('/purchase-entery', 'Purchase_Controller@index')->name('purchase');
+Route::post('/purchase-entery', 'Purchase_Controller@store')->name('purchase');
+
+
+
+//Invoice Report view
 Route::get('/day-report', 'Report_Controller@dayreport');
 Route::get('/monthly-report', 'Report_Controller@monthlyreport');
 Route::post('/day-report', 'Invoice_Controller@filterdata');
 Route::post('/monthly-report', 'Invoice_Controller@filtermonthly');
 Route::get('/view-report/{id}', 'Invoice_Controller@viewreport');
 
+//Purchase Report view
+Route::get('/dayreport', 'Report_Controller@purchasedayreport');
+Route::get('/monthlyreport', 'Report_Controller@purchasemonthlyreport');
+Route::post('/dayreport', 'Purchase_Controller@filterdata');
+Route::post('/monthlyreport', 'Purchase_Controller@filtermonthly');
+Route::get('/view-purchasereport/{id}', 'Purchase_Controller@viewreport');
 
+
+Route::get('/all-customer/pdf','Report_Controller@export_pdf');
 
 
 //api 
+Route::get('api/supplier/{id}', 'Supplier_Controller@getsupplier');
 Route::get('api/customer/{id}', 'Customer_Controller@getcustomer');
 Route::get('api/material/{id}' ,'Material_Controller@getmaterial');

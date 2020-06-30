@@ -1,10 +1,10 @@
 @extends('layouts.theme')
 
 @section('headline')
-All Customer
+All Supplier
 @endsection
 @section('content')
-  <div class="customerlist">
+  <div class="supplierlist">
     <div class="table-responsive reportviewtable ">
   	<table class="table table-bordered">
     <thead>
@@ -22,17 +22,17 @@ All Customer
     </thead>
     <tbody>
     	<?php $id =1; ?>
-    	@foreach($customers as $customer)
+    	@foreach($suppliers as $supplier)
       <tr>
         <td>{{$id}}</td>
-        <td>{{$customer->customer_name}}</td>
-        <td>{{$customer->phone_no}}</td>
-        <td>{{$customer->address}}</td>
-        <td>{{$customer->gst_no}}</td>
-        <td>{{$customer->state}}</td>
-        <td>{{$customer->code}}</td>
-        <td><a href="/customer-edit/{{$customer->id}}"><i class="fas fa-edit"></i> <span class="glyphicon glyphicon-edit"></span></a></td>
-        <td><a href="/customer/{{$customer->id}}"><i class="fas fa-trash-alt"></i></a></td>
+        <td>{{$supplier->supplier_name}}</td>
+        <td>{{$supplier->phone_no}}</td>
+        <td>{{$supplier->address}}</td>
+        <td>{{$supplier->gst_no}}</td>
+        <td>{{$supplier->state}}</td>
+        <td>{{$supplier->code}}</td>
+        <td><a href="/supplier-edit/{{$supplier->id}}"><i class="fas fa-edit"></i> <span class="glyphicon glyphicon-edit"></span></a></td>
+        <td><a href="/supplier/{{$supplier->id}}"><i class="fas fa-trash-alt"></i></a></td>
       </tr>
          <?php $id++ ?>
          @endforeach

@@ -34,7 +34,10 @@ Customer edit
             <label for="inputstatus">Status</label>
             <input type="text" class="form-control" id="status" name="state" value="{{$customer->state}}">
         </div>
-
+        <div class="form-group">
+            <label for="inputcode">Code</label>
+            <input type="text" class="form-control" id="code" name="code" value="{{$customer->code}}">
+        </div>
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>

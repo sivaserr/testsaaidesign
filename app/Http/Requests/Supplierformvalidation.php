@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class formvalidation extends FormRequest
+class Supplierformvalidation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class formvalidation extends FormRequest
     public function rules()
     {
         return [
-            'gstno' => 'required|max:15,unique:customers,gst_no',
-            'phoneno' => 'required|max:12,phone_no',
+            'suppliergstno' => 'required|max:15,unique:suppliers,gst_no',
         ];
     }
 }

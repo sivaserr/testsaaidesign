@@ -48,9 +48,9 @@ class Invoice_Controller extends Controller
         $invoice->customer_id = $request->input('customer');
         $invoice->date = $request->input('date');
         $invoice->sub_total = $request->input('sub_total');
-        $invoice->total_cgst = $request->input('totalcgst');
-        $invoice->total_sgst = $request->input('totalsgst');
-        $invoice->total_tax = $request->input('tax');
+        // $invoice->total_cgst = $request->input('totalcgst');
+        // $invoice->total_sgst = $request->input('totalsgst');
+        // $invoice->total_tax = $request->input('tax');
         $invoice->tax_amount = $request->input('tax_amount');
         $invoice->grand_total = $request->input('grand_total');
 
@@ -64,14 +64,15 @@ class Invoice_Controller extends Controller
         $invoice_products->invoice_id =$invoice->id ;
         $invoice_products->description = $invoiceproduct['description'];
         $invoice_products->material_id = $invoiceproduct['material'];
+        $invoice_products->hsn = $invoiceproduct['hsn'];
         $invoice_products->size = $invoiceproduct['size'];
-        $invoice_products->sqrft = $invoiceproduct['sqrfts'];
         $invoice_products->qty = $invoiceproduct['qty'];
         $invoice_products->total_sqrft_copies = $invoiceproduct['total'];
         $invoice_products->price = $invoiceproduct['price'];
         $invoice_products->cgst = $invoiceproduct['cgst'];
         $invoice_products->sgst = $invoiceproduct['sgst'];
         $invoice_products->netvalue = $invoiceproduct['netvalue'];
+        $invoice_products->taxamount = $invoiceproduct['rowtaxamount'];
         $invoice_products->save();
              }
 
@@ -140,7 +141,7 @@ class Invoice_Controller extends Controller
         $Invoices = Invoices::where([ ['date','=',$request->date]  ])->get();
 
         $data['Invoices'] = $Invoices;
-       return view('report.dayreport',$data);
+       return view('invoice_report.dayreport',$data);
    }
 
     public function filtermonthly(Request $request){
@@ -150,14 +151,14 @@ class Invoice_Controller extends Controller
         $Invoices = Invoices::whereBetween('date',[$from_date, $to_date])->get();
 
         $data['Invoices'] = $Invoices;
-        return view('report.monthlyreport',$data);
+        return view('invoice_report.monthlyreport',$data);
     }
     public function viewreport($id){
 
         $invoice = Invoices::find($id);
 
 
-        return view('report.reportview')->with('invoice',$invoice);
+        return view('invoice_report.reportview')->with('invoice',$invoice);
 
     }
 

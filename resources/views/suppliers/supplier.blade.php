@@ -2,16 +2,16 @@
 
 
 @section('headline')
-Customer
+Suppler
 @endsection
 
 @section('content')
 <div class="customers">
-    <form action="{{route('customer')}}" method="POST">
+    <form action="{{route('supplier')}}" method="POST">
         {{ csrf_field()}}
         <div class="form-group">
-            <label for="inputcustomername">Customer Name</label>
-            <input type="text" class="form-control" id="customername" name="customername" placeholder="Customer Name" required>
+            <label for="inputsuppliername">Supplier Name</label>
+            <input type="text" class="form-control" id="suppliername" name="suppliername" placeholder="Supplier Name" required>
         </div>
         <div class="form-group">
             <label for="inputphoneno">Phone No</label>
@@ -27,7 +27,7 @@ Customer
         </div>
         <div class="form-group">
             <label for="inputgstno">Gst No</label>
-            <input type="text" class="form-control" id="gstno" name="gstno" placeholder="gstno" required>
+            <input type="text" class="form-control" id="gstno" name="suppliergstno" placeholder="gstno" required>
         </div>
         <div class="form-group">
             <label for="inputstatus">Status</label>
