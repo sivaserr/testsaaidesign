@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\formvalidation;
+// use App\Http\Requests\formvalidation;
 use App\Customers;
 
 class Customer_Controller extends Controller
@@ -39,11 +39,12 @@ class Customer_Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(formvalidation  $request)
+    public function store(Request  $request)
     {
-        // $request->validate([
-        //  'gst_no' => 'required|unique:customers',
-        // ]);
+        $request->validate([
+         'gstno' => 'required|unique:customers,gst_no,'.$id,
+         'phoneno' => 'required|max:12|min:10|unique:customers,phone_no,'.$id,
+        ]);
 
 
         $customers = new Customers();

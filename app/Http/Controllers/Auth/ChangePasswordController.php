@@ -28,7 +28,7 @@ class ChangePasswordController extends Controller
             $user->save();
             Auth::logout();
 
-            return redirect(route('login'))->with('successMsg',"Password is changed successfully!!");
+            return redirect(route('login'))->with('message',"Password is changed successfully!!");
         }else{
             return redirect()->back()->with('error',"Current password is invalid");
         }

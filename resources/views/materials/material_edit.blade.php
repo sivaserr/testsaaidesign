@@ -19,7 +19,7 @@ Material Edit
         </div>
         <div class="form-group">
             <label for="inputcode">HSN/SAC Code</label>
-            <input type="text" class="form-control" id="code" name="code" value="{{$material->hsn_code}}">
+            <input type="text" class="form-control" id="hsncode" name="hsncode" value="{{$material->hsn_code}}">
         </div>
         <div class="form-group">
             <label for="inputcode">CGST(%)</label>
@@ -32,10 +32,14 @@ Material Edit
         <div class="units">
         <label for="inputunit">Unit</label>
         <select name="unit" id="unit" class="form-control">
-            <option>{{$material->unit_name}}</option>
-              @foreach($units as $unit)
+            @foreach($units as $unit)
+            @if($material->unit == $unit->id)
+            <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
+            @endif
+            @endforeach
+            @foreach($units as $unit)
                 <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
-              @endforeach
+            @endforeach
               </select>
           </div>
 <!--         <div class="form-group">

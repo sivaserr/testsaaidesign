@@ -40,10 +40,15 @@ class Material_Controller extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+         'hsncode' => 'required|unique:materials,hsn_code',
+        ]);
+
         $materials  = new Materials();
 
         $materials->material_name =$request->input('productname');
-        $materials->hsn_code =$request->input('code');
+        $materials->hsn_code =$request->input('hsncode');
         $materials->cgst =$request->input('cgst');
         $materials->sgst =$request->input('sgst');
         $materials->unit =$request->input('unit');
@@ -90,10 +95,14 @@ class Material_Controller extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+         'hsncode' => 'required|unique:materials,hsn_code,'.$id,
+        ]);
+
         $materials  = Materials::find($id);
 
         $materials->material_name =$request->input('productname');
-        $materials->hsn_code =$request->input('code');
+        $materials->hsn_code =$request->input('hsncode');
         $materials->cgst =$request->input('cgst');
         $materials->sgst =$request->input('sgst');
         $materials->unit =$request->input('unit');

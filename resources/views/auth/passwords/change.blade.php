@@ -14,7 +14,7 @@ Change Password
 }
 </style>
 @section('content')
-@if(session('error'))
+<!-- @if(session('error'))
 <div class="alert alert-icon alert-danger alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="close">
         <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@ Change Password
     <strong>Oh snap!</strong>
     {{session('error')}}
 </div>
-@endif
+@endif -->
                     <form method="POST" action="{{ route('password.update') }}">
                         {{ csrf_field() }}
 

@@ -2,7 +2,7 @@
 
 
 @section('headline')
-Suppler
+Supplier
 @endsection
 
 @section('content')
@@ -27,7 +27,7 @@ Suppler
         </div>
         <div class="form-group">
             <label for="inputgstno">Gst No</label>
-            <input type="text" class="form-control" id="gstno" name="suppliergstno" placeholder="gstno" required>
+            <input type="text" class="form-control" id="gstno" name="gstno" placeholder="gstno" required>
         </div>
         <div class="form-group">
             <label for="inputstatus">Status</label>

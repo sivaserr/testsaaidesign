@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
@@ -13,10 +12,27 @@
 <!--                     <span class="login100-form-title p-b-32">
                         Account Login
                     </span> -->
+                    <div class="changealert"> 
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">{{session('error')}}</div>
+@endif
 
-                    <span class="txt1 p-b-11">
+@if($errors->any())
+@foreach($errors->all() as $error)
+<div class="alert alert-danger">
+<li>{{$error}}</li>
+</div>
+@endforeach
+@endif
+</div>
+                    <div class="txt1 p-b-11">
                         Username
-                    </span>
+                    </div>
                     <div class="wrap-input100 validate-input m-b-36" >
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 

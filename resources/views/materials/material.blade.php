@@ -18,7 +18,7 @@ Material
         </div>
         <div class="form-group">
             <label for="inputcode">HSN/SAC Code</label>
-            <input type="text" class="form-control" id="code" name="code" placeholder="HSN/SAC code" required>
+            <input type="text" class="form-control" id="hsncode" name="hsncode" placeholder="HSN/SAC code" required>
         </div>
         <div class="form-group">
             <label for="inputcode">CGST(%)</label>

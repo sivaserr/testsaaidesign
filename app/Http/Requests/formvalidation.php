@@ -24,8 +24,8 @@ class formvalidation extends FormRequest
     public function rules()
     {
         return [
-            'gstno' => 'required|max:15,unique:customers,gst_no',
-            'phoneno' => 'required|max:12,phone_no',
+            // 'gstno' => 'required|max:15,unique:customers,gst_no',
+            // 'phoneno' => 'required|max:12,phone_no',
         ];
     }
 }

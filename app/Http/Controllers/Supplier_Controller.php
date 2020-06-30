@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Suppliers;
-use App\Http\Requests\Supplierformvalidation;
-
 class Supplier_Controller extends Controller
 {
     /**
@@ -38,12 +36,15 @@ class Supplier_Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Supplierformvalidation $request)
+    public function store(Request $request)
     {
         // $request->validate([
         //  'gst_no' => 'required|unique:customers',
         // ]);
-
+        $request->validate([
+         'gstno' => 'required|unique:suppliers,gst_no',
+         'phoneno' => 'required|max:12|min:10|unique:suppliers,phone_no',
+        ]);
 
         $supplier = new Suppliers();
 
@@ -51,9 +52,11 @@ class Supplier_Controller extends Controller
         $supplier->phone_no = $request->input('phoneno');
         $supplier->address = $request->input('address');
         $supplier->company_name = $request->input('companyname');
-        $supplier->gst_no = $request->input('suppliergstno');
+        $supplier->gst_no = $request->input('gstno');
         $supplier->state = $request->input('state');
         $supplier->code = $request->input('code');
+
+
 
         $supplier->save();
         
@@ -84,7 +87,7 @@ class Supplier_Controller extends Controller
     {
         $supplier = Suppliers::find($id);
 
-        return view('supplier.supplier_edit')->with('supplier',$supplier);
+        return view('suppliers.supplier_edit')->with('supplier',$supplier);
     }
 
     /**
@@ -94,15 +97,20 @@ class Supplier_Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Supplierformvalidation $request, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+         'gstno' => 'required|unique:suppliers,gst_no,'.$id,
+         'phoneno' => 'required|max:12|min:10|unique:suppliers,phone_no,'.$id,
+        ]);
+
         $suppliers = Suppliers::find($id);
 
         $suppliers->supplier_name = $request->input('suppliername');
         $suppliers->phone_no = $request->input('phoneno');
         $suppliers->address = $request->input('address');
         $suppliers->company_name = $request->input('companyname');
-        $suppliers->gst_no = $request->input('suppliergstno');
+        $suppliers->gst_no = $request->input('gstno');
         $suppliers->state = $request->input('state');
         $suppliers->code = $request->input('code');
 

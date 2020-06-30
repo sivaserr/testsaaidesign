@@ -77,7 +77,7 @@ Monthly wise report
             @endif
             @endforeach
             <td>{{$Invoice->sub_total}}</td>
-            <td>{{$Invoice->total_tax}}</td>
+            <td>{{$Invoice->tax_amount}}</td>
             <td>{{$Invoice->grand_total}}</td>
 
           <td><a href="/view-report/{{$Invoice->id}}" ><i class="fas fa-print"></i></a>
